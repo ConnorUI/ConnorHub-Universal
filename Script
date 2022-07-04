@@ -1,3 +1,20 @@
+--[[
+
+New Version (Rewrite)
+
+ConnorHub Universal/Free
+
+Made By ConnorUI#1069
+
+Update 1: 2022 July 4
+
+]]--
+
+--// Settings\\--
+
+local CurrentVer = "2.0"
+local Plr = game.Players.LocalPlayer
+
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 local UI = Material.Load({
