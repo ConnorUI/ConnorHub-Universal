@@ -26,13 +26,6 @@ Page.Button({
 	end
 })
 
-Page.Button({
-	Text = "Current Game - "..GameN,
-	Callback = function()
-		setclipboard(tostring("ConnorUI#1069"))
-	end
-})
-
 local Page = UI.New({
 	Title = "Movement"
 })
