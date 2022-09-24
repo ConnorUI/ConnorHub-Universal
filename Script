@@ -10,12 +10,14 @@ Update 1: 2022 July 4
 
 Update 2: 2022 July 12
 
+Update 3: 2022 September 24
+
 ]]--
 
 --// Settings\\--
 
-local CurrentVer = "2.5"
-local OlderVer = "2.0"
+local CurrentVer = "2.6"
+local OlderVer = "2.5"
 local Plr = game.Players.LocalPlayer
 
 --// Script \\--
@@ -23,7 +25,7 @@ local Plr = game.Players.LocalPlayer
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 local UI = Material.Load({
-	Title = " ConnorHub - Universal (Re Write) "..CurrentVer,
+	Title = " ConnorHub - Universal v"..CurrentVer,
 	Style = 1,
 	SizeX = 500,
 	SizeY = 340,
@@ -55,7 +57,13 @@ Page.Button({
 })
 
 Page.Button({
-	Text = "Update 2: +Scripts And Options",
+	Text = "Update 2: + Scripts And Options",
+	Callback = function()
+	end
+})
+
+Page.Button({
+	Text = "Update 3: + UI Fix",
 	Callback = function()
 	end
 })
@@ -69,7 +77,7 @@ local Page = UI.New({
 Page.Button({
 	Text = "Copy My Discord",
 	Callback = function()
-		setclipboard(tostring("ConnorUI#1069"))
+		setclipboard(tostring("Cynt X#1069"))
 	end
 })
 
@@ -86,7 +94,7 @@ Page.Button({
 })
 
 Page.Button({
-	Text = "UI Library Owner - twink marie",
+	Text = "UI Library Owner - Twink Marie",
 	Callback = function()
 	end
 })
@@ -98,21 +106,21 @@ local Page = UI.New({
 })
 
 Page.Slider({
-	Text = "Speed",
+	Text = "Speed Changer",
 	Callback = function(value)
 		Plr.Character.Humanoid.WalkSpeed = value
 	end,
-	Min = 18,
-	Max = 100,
+	Min = 16,
+	Max = 250,
 	Def = 16
 })
 
 Page.Slider({
-	Text = "Jump Power",
+	Text = "Jump Power Changer",
 	Callback = function(value)
 		Plr.Character.Humanoid.JumpPower = value
 	end,
-	Min = 60,
+	Min = 50,
 	Max = 200,
 	Def = 50
 })
@@ -152,7 +160,7 @@ Page.Button({
 })
 
 Page.Button({
-	Text = "NoClip (Rejoin To Disable)",
+	Text = "Noclip (Rejoin To Disable)",
 	Callback = function()
 		local noclip = true char = game.Players.LocalPlayer.Character while true do if noclip == true then for _,v in pairs(char:children()) do pcall(function() if v.className == "Part" then v.CanCollide = false elseif v.ClassName == "Model" then v.Head.CanCollide = false end end) end end game:service("RunService").Stepped:wait() end
 	end
@@ -190,7 +198,7 @@ Page.Button({
 })
 
 Page.Button({
-	Text = "FPS Booster",
+	Text = "Fps Booster (Rejoin To Disable)",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/ConnorUI/FPS-Booster/main/Script",true))();
 	end
@@ -211,7 +219,7 @@ Page.Button({
 })
 
 local Page = UI.New({
-	Title = "Misc"
+	Title = "Guis"
 })
 
 Page.Button({
@@ -236,7 +244,7 @@ Page.Button({
 })
 
 Page.Button({
-	Text = "Unnamed ESP",
+	Text = "Unnamed Esp",
 	Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua",true))();
 	end
