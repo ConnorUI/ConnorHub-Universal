@@ -1,258 +1,251 @@
---[[
+-- Settings
 
-New Version (Rewrite)
-
-ConnorHub Universal
-
-Made By ConnorUI#1069
-
-Update 1: 2022 July 4
-
-Update 2: 2022 July 12
-
-Update 3: 2022 September 24
-
-]]--
-
---// Settings\\--
-
-local CurrentVer = "2.6"
-local OlderVer = "2.5"
+local CurrentVer = "v1.5"
 local Plr = game.Players.LocalPlayer
 
---// Script \\--
+-- Theme
 
-local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+local HubTheme = {
+	SchemeColor = Color3.fromRGB(110, 0, 255),
+	Background = Color3.fromRGB(25, 25, 25),
+	Header = Color3.fromRGB(15, 15, 15),
+	TextColor = Color3.fromRGB(255,255,255),
+	ElementColor = Color3.fromRGB(35, 35, 35)
+}
 
-local UI = Material.Load({
-	Title = " ConnorHub - Universal v"..CurrentVer,
-	Style = 1,
-	SizeX = 500,
-	SizeY = 340,
-	Theme = "Dark"
-})
+-- Script
 
--- Main Page
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("ConnorHub - Universal "..CurrentVer, HubTheme)
 
-local Page = UI.New({
-	Title = "Main"
-})
+-- Main
 
-Page.Button({
-	Text = "This Is A Full Re Write",
-	Callback = function()
-	end
-})
+local Tab = Window:NewTab("Home")
+local Section = Tab:NewSection("My Contacts")
 
-Page.Button({
-	Text = "I Added More Scripts And Options",
-	Callback = function()
-	end
-})
+Section:NewButton("beacons.ai/connorhub (Click To Copy)", "", function()
+	setclipboard(tostring("beacons.ai/connorhub"))
+end)
 
-Page.Button({
-	Text = "Update 1: The Re Write",
-	Callback = function()
-	end
-})
+Section:NewButton("Also Join To My Discord Server!")
 
-Page.Button({
-	Text = "Update 2: + Scripts And Options",
-	Callback = function()
-	end
-})
+-- Ui's
 
-Page.Button({
-	Text = "Update 3: + UI Fix",
-	Callback = function()
-	end
-})
+local Tab = Window:NewTab("Gui's")
+local Section = Tab:NewSection("Troll Gui's")
 
--- Info Page
+Section:NewButton("Stream Sniper", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ConnorUI/Roblox-Sniper/main/Script",true))()
+end)
 
-local Page = UI.New({
-	Title = "Info"
-})
+Section:NewButton("Infinite Yield", "", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
 
-Page.Button({
-	Text = "Copy My Discord",
-	Callback = function()
-		setclipboard(tostring("Cynt X#1069"))
-	end
-})
+Section:NewButton("Unnamed Esp", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua",true))()
+end)
 
-Page.Button({
-	Text = "Latest Version - "..CurrentVer,
-	Callback = function()
-	end
-})
+Section:NewButton("DomainHub X", "", function()
+    loadstring(game:HttpGet(('https://shlex.dev/release/domainx/latest.lua'),true))()
+end)
 
-Page.Button({
-	Text = "Older Version - "..OlderVer,
-	Callback = function()
-	end
-})
+-- Character
 
-Page.Button({
-	Text = "UI Library Owner - Twink Marie",
-	Callback = function()
-	end
-})
+local Tab = Window:NewTab("Character")
+local Section = Tab:NewSection("Movement")
 
--- Movement Page
+Section:NewSlider("Walk Speed", "Change WalkSpeed", 400, 1, function(s)
+	Plr.Character.Humanoid.WalkSpeed = s
+end)
 
-local Page = UI.New({
-	Title = "Movement"
-})
+Section:NewSlider("Jump Power", "Change WalkSpeed", 400, 1, function(jp)
+	Plr.Character.Humanoid.JumpPower = jp
+end)
 
-Page.Slider({
-	Text = "Speed Changer",
-	Callback = function(value)
-		Plr.Character.Humanoid.WalkSpeed = value
-	end,
-	Min = 16,
-	Max = 250,
-	Def = 16
-})
+Section:NewButton("Infinite Jump", "", function()
+    InfJump = true
 
-Page.Slider({
-	Text = "Jump Power Changer",
-	Callback = function(value)
-		Plr.Character.Humanoid.JumpPower = value
-	end,
-	Min = 50,
-	Max = 200,
-	Def = 50
-})
-
-Page.Button({
-	Text = "Reset Speed",
-	Callback = function()
-		Plr.Character.Humanoid.WalkSpeed = 16
-	end
-})
-
-Page.Button({
-	Text = "Reset Jump Power",
-	Callback = function()
-		Plr.Character.Humanoid.JumpPower = 50
-	end
-})
-
-Page.Button({
-	Text = "Infinite Jump (Rejoin To Disable)",
-	Callback = function()
-		InfJump = true
-
-		game:GetService("UserInputService").JumpRequest:Connect(function()
-			if InfJump then
-				game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-			end
-		end)
-	end
-})
-
-Page.Button({
-	Text = "Lag Switch (X Toggle)",
-	Callback = function()
-		loadstring(game:HttpGet("https://paste.gg/p/anonymous/d3492bd620bd4c46b54680ac80b0fa0d/files/161ddd9c992c4ceba3c298458d45188a/raw", true))()
-	end
-})
-
-Page.Button({
-	Text = "Noclip (Rejoin To Disable)",
-	Callback = function()
-		local noclip = true char = game.Players.LocalPlayer.Character while true do if noclip == true then for _,v in pairs(char:children()) do pcall(function() if v.className == "Part" then v.CanCollide = false elseif v.ClassName == "Model" then v.Head.CanCollide = false end end) end end game:service("RunService").Stepped:wait() end
-	end
-})
-
--- Options Page
-
-local Page = UI.New({
-	Title = "Options"
-})
-
-Page.Toggle({
-	Text = "Day/Night",
-	Callback = function(Day)
-		if Day then
-			game.Lighting.ClockTime = 9
-		else
-			game.Lighting.ClockTime = 23
+	game:GetService("UserInputService").JumpRequest:Connect(function()
+		if InfJump then
+			game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
 		end
-	end,
-	Enabled = true,
-})
+	end)
+end)
 
-Page.Button({
-	Text = "Remove Light Effects",
-	Callback = function()
-		game.Lighting.Blur.Enabled = false
-		game.Lighting.Bloom.Enabled = false
-		game.Lighting.ColorCorrection.Enabled = false
-		game.Lighting.DepthOfField.Enabled = false
-		game.Lighting.SunRays.Enabled = false
-		game.Lighting.GlobalShadows = false
-		game.Lighting.Brightness = 1
+Section:NewButton("Lag Switch (X)", "", function()
+    loadstring(game:HttpGet("https://paste.gg/p/anonymous/d3492bd620bd4c46b54680ac80b0fa0d/files/161ddd9c992c4ceba3c298458d45188a/raw", true))()
+end)
+
+local Section = Tab:NewSection("Resets")
+
+Section:NewButton("Reset Speed", "", function()
+    Plr.Character.Humanoid.WalkSpeed = 16
+end)
+
+Section:NewButton("Reset Jump Power", "", function()
+    Plr.Character.Humanoid.JumpPower = 50
+end)
+
+local Section = Tab:NewSection("Teleprt To Players")
+players = {}
+
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+	table.insert(players,v.Name)
+end
+
+Section:NewDropdown("Select Player", "Select", players, function(abc)
+	Select = abc
+end)
+
+local oldList = {
+	abc
+}
+local newList = {
+	players
+}
+
+Section:NewButton("Refresh Player List", "", function()
+	dropdown:Refresh(newList)
+end)
+
+Section:NewButton("Teleport", "Teleports", function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Select].Character.HumanoidRootPart.CFrame
+end)
+
+local Section = Tab:NewSection("Anti AFK")
+
+Section:NewButton("Anti AFK", "Turns On Anti AFK", function()
+	wait(0.5)local ba=Instance.new("ScreenGui")
+	local ca=Instance.new("TextLabel")local da=Instance.new("Frame")
+	local _b=Instance.new("TextLabel")local ab=Instance.new("TextLabel")ba.Parent=game.CoreGui
+	ba.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;ca.Parent=ba;ca.Active=true
+	ca.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ca.Draggable=true
+	ca.Position=UDim2.new(0.698610067,0,0.098096624,0)ca.Size=UDim2.new(0,370,0,52)
+	ca.Font=Enum.Font.SourceSansSemibold;ca.Text="Anti AFK"ca.TextColor3=Color3.new(0,1,1)
+	ca.TextSize=22;da.Parent=ca
+	da.BackgroundColor3=Color3.new(0.196078,0.196078,0.196078)da.Position=UDim2.new(0,0,1.0192306,0)
+	da.Size=UDim2.new(0,370,0,107)_b.Parent=da
+	_b.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)_b.Position=UDim2.new(0,0,0.800455689,0)
+	_b.Size=UDim2.new(0,370,0,21)_b.Font=Enum.Font.Arial;_b.Text="Headshot#5868"
+	_b.TextColor3=Color3.new(0,1,1)_b.TextSize=20;ab.Parent=da
+	ab.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ab.Position=UDim2.new(0,0,0.158377,0)
+	ab.Size=UDim2.new(0,370,0,44)ab.Font=Enum.Font.ArialBold;ab.Text="Status: Active"
+	ab.TextColor3=Color3.new(0,1,1)ab.TextSize=20;local bb=game:service'VirtualUser'
+	game:service'Players'.LocalPlayer.Idled:connect(function()
+		bb:CaptureController()bb:ClickButton2(Vector2.new())
+		ab.Text="Roblox tried to kick u but i kicked him instead"wait(2)ab.Text="Status: Active"
+	end)
+end)
+
+-- Options
+
+local Tab = Window:NewTab("Options")
+local Section = Tab:NewSection("UI Settings")
+
+Section:NewKeybind("Toggle UI", "Toggles The UI", Enum.KeyCode.Insert, function()
+	Library:ToggleUI()
+end)
+
+local Section = Tab:NewSection("Graphics")
+
+Section:NewToggle("Day/Night", "Toggles Day/Night", function(state)
+	if state then
+		game.Lighting.ClockTime = 10
+	else
+		game.Lighting.ClockTime = 23
 	end
-})
+end)
 
-Page.Button({
-	Text = "Fps Booster (Rejoin To Disable)",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/ConnorUI/FPS-Booster/main/Script",true))();
+Section:NewButton("Remove GFX Effects", "Removes Light Effects", function()
+	game.Lighting.Bloom.Enabled = false
+	game.Lighting.Blur.Enabled = false
+	game.Lighting.SunRaysEffect.Enabled = false
+	game.Lighting.ColorCorrection.Enabled = false
+	game.Lighting.DepthOfField.Enabled = false
+	game.Lighting.GlobalShadows = false
+end)
+
+Section:NewButton("FPS Booster (Rejoin To Disable)","Turns On FPS Booster", function()	
+	local decalsyeeted = true
+	local g = game
+	local w = g.Workspace
+	local l = g.Lighting
+	local t = w.Terrain
+	sethiddenproperty(l,"Technology",2)
+	sethiddenproperty(t,"Decoration",false)
+	t.WaterWaveSize = 0
+	t.WaterWaveSpeed = 0
+	t.WaterReflectance = 0
+	t.WaterTransparency = 0
+	l.GlobalShadows = false
+	l.FogEnd = 9e9
+	l.Brightness = 0
+	settings().Rendering.QualityLevel = "Level01"
+	for i, v in pairs(g:GetDescendants()) do
+		if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+			v.Material = "Plastic"
+			v.Reflectance = 0
+		elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+			v.Transparency = 1
+		elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+			v.Lifetime = NumberRange.new(0)
+		elseif v:IsA("Explosion") then
+			v.BlastPressure = 1
+			v.BlastRadius = 1
+		elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+			v.Enabled = false
+		elseif v:IsA("MeshPart") then
+			v.Material = "Plastic"
+			v.Reflectance = 0
+			v.TextureID = 10385902758728957
+		end
 	end
-})
-
-Page.Button({
-	Text = "Hide Name (Random)",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/ConnorUI/UserSpoof/main/Script",true))();
+	for i, e in pairs(l:GetChildren()) do
+		if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+			e.Enabled = false
+		end
 	end
-})
+end)
 
-Page.Button({
-	Text = "High Graphics (Might Make You Lag!)",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/ConnorUI/Graphics-Roblox/main/Script",true))();
-	end
-})
+-- Others
 
-local Page = UI.New({
-	Title = "Guis"
-})
+local Tab = Window:NewTab("Others")
+local Section = Tab:NewSection("ConnorHub Credits")
 
-Page.Button({
-	Text = "Stream Sniper Gui",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/ConnorUI/Roblox-Sniper/main/Script",true))();
-	end
-})
+Section:NewDropdown("Credits", "Shows The Credits", {"UI Library: xHeptc", "Made By: Cynt X","Anti AFK By: Headshot#5868"})
 
-Page.Button({
-	Text = "Anti AFK Gui",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/ConnorUI/Roblox-Anti-AFK/main/Script",true))();
-	end
-})
+local Section = Tab:NewSection("My Discord")
 
-Page.Button({
-	Text = "Infinite Yield",
-	Callback = function()
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-	end
-})
+Section:NewButton("Copy My Discord", "Copies Discord Name", function()
+	setclipboard(tostring("ConnorUI#1069"))
+end)
 
-Page.Button({
-	Text = "Unnamed Esp",
-	Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua",true))();
-	end
-})
+-- User Info
 
-Page.Button({
-	Text = "Domain Hub X",
-	Callback = function()
-		loadstring(game:HttpGet(('https://shlex.dev/release/domainx/latest.lua'),true))()
-	end
-})
+local Tab = Window:NewTab("User")
+local Section = Tab:NewSection("User Info")
+
+Section:NewButton("Username - "..Plr.Name, "", function()
+	setclipboard(tostring(Plr.Name))
+end)
+
+Section:NewButton("Display Name - "..Plr.DisplayName, "", function()
+	setclipboard(tostring(Plr.DisplayName))
+end)
+
+Section:NewButton("Account Age (Days) - "..Plr.AccountAge, "", function()
+	setclipboard(tostring(Plr.AccountAge))
+end)
+
+Section:NewButton("User Id - "..Plr.UserId, "", function()
+	setclipboard(tostring(Plr.UserId))
+end)
+
+Section:NewButton("Region Id - "..Plr.LocaleId, "", function()
+	setclipboard(tostring(Plr.LocaleId))
+end)
+
+Section:NewButton("Membership - "..Plr.MembershipType.Name, "", function()
+	setclipboard(tostring(Plr.MembershipType.Name))
+end)
